@@ -81,14 +81,6 @@
 
 					-moz-border-radius: 50px;
 					border-radius: 50px;
-
-					transform-style: preserve-3d;
-					-webkit-transform-style: preserve-3d;
-					-moz-transform-style: preserve-3d;
-
-					transition: -webkit-transform 0.75s;
-					-webkit-transition: -webkit-transform 0.75s;
-					-moz-transition: -webkit-transform 0.75s;
 				}
 	</style>
 </head>
@@ -134,7 +126,7 @@
 				orientation: "vertical",
 				min: 0,
 				max: 360,
-				change: function(event, ui) {
+				slide: function(event, ui) {
 					output_el.html(ui.value);
 					update_transforms();
 				}
