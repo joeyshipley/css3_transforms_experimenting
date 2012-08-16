@@ -1,0 +1,156 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="ui-lightness/jquery-ui-1.8.23.custom.css" />
+	<style type="text/css">
+		HTML, BODY {
+			position: relative;
+			display: block;
+			margin: 0;
+			padding: 0;
+			background: #CCCCCC;
+		}
+
+		#page {
+			position: relative;
+			display: block;
+			top: 1em;
+			width: 960px;
+			left: 50%;
+			margin-left: -480px;
+			background: #EEEEEE;
+
+			-moz-box-shadow: 0px 0px 3px #333333;
+			-webkit-box-shadow: 0px 0px 3px #333333;
+			box-shadow: 0px 0px 3px #333333;
+		}
+
+			#transform-controls, #transform-container {
+				position: relative;
+				display: inline-block;
+				vertical-align: top;
+			}
+
+			#transform-controls {
+				width: 20%;
+				margin-right: 3%;
+				padding: 4px 6px;
+			}
+
+			#transform-container {
+				width: 70%;
+			}
+
+				#transform-controls .control {
+					position: relative;
+					display: inline-block;
+					min-width: 25px;
+					margin: 0 5%;
+					text-align: center;
+				}
+
+					#transform-controls .control .slider {
+						margin: 1em 0 0 5px;
+						height: 200px;
+					}
+
+					#transform-controls .control LABEL {
+						position: relative;
+						display: block;
+						width: 100%;
+						margin-top: 1em;
+						text-align: center;
+					}
+			
+				#transform-plane {
+					position: relative;
+					display: block;
+					width: 600px;
+					height: 600px;
+					margin: 20px;
+					line-height: 600px;
+					font-size: 100px;
+					text-align: center;
+					font-variant: small-caps;
+					
+					color: #6b6a30;
+					background: #bdbb5e;
+					background-image: url(grid.png);
+					background-position: center center;
+					background-repeat: repeat;
+					border: 4px solid #dad887;
+
+					-moz-border-radius: 50px;
+					border-radius: 50px;
+
+					transform-style: preserve-3d;
+					-webkit-transform-style: preserve-3d;
+					-moz-transform-style: preserve-3d;
+
+					transition: -webkit-transform 0.75s;
+					-webkit-transition: -webkit-transform 0.75s;
+					-moz-transition: -webkit-transform 0.75s;
+				}
+	</style>
+</head>
+
+<body>
+
+	<div id="page">
+		<div id="transform-controls">
+			<div class="control">
+				<label>X</label>
+				<div id="x-slider" class="slider"></div>
+				<label id="x-label">0</label>
+			</div>
+			<div class="control">
+				<label>Y</label>
+				<div id="y-slider" class="slider"></div>
+				<label id="y-label">0</label>
+			</div>
+			<div class="control">
+				<label>Z</label>
+				<div id="z-slider" class="slider"></div>
+				<label id="z-label">0</label>
+			</div>
+		</div>
+
+		<div id="transform-container">
+			<span id="transform-plane">Lorem Ipsum</span>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="jquery-ui-1.8.23.custom.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			init_slider($("#x-slider"), $("#x-label"));
+			init_slider($("#y-slider"), $("#y-label"));
+			init_slider($("#z-slider"), $("#z-label"));
+		});
+
+		function init_slider(container_el, output_el) {
+			container_el.slider({
+				orientation: "vertical",
+				min: 0,
+				max: 360,
+				change: function(event, ui) {
+					output_el.html(ui.value);
+					update_transforms();
+				}
+			});
+		}
+
+		function update_transforms() {
+			var plane = $("#transform-plane");
+			var x = $("#x-label").html();
+			var y = $("#y-label").html();
+			var z = $("#z-label").html();
+
+			plane.css("transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
+			plane.css("-webkit-transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
+			plane.css("-moz-transform", "rotateX(" + x + "deg) rotateY(" + y + "deg) rotateZ(" + z + "deg)");
+		}
+	</script>
+</body>
+</html>
